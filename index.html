@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 A Gift For You 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90%;
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+        }
+
+        /* Page Sections */
+        .page {
+            display: none;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Landing Page */
+        .landing {
+            text-align: center;
+            color: white;
+        }
+
+        .landing h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .landing .heart {
+            display: inline-block;
+            font-size: 4em;
+            animation: heartbeat 1.2s ease-in-out infinite;
+            margin: 0 10px;
+        }
+
+        .landing .heart img.landing-gif {
+            width: 6.5rem;
+            height: auto;
+            display: inline-block;
+            border-radius: 12px;
+            vertical-align: middle;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.18);
+        }
+
+        /* Animated Flowers */
+        .floating-flower {
+            position: absolute;
+            font-size: 2.5em;
+            animation: floatFlower 6s ease-in-out infinite;
+        }
+
+        .flower1 {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .flower2 {
+            top: 15%;
+            right: 8%;
+            animation-delay: 1s;
+        }
+
+        .flower3 {
+            top: 70%;
+            left: 8%;
+            animation-delay: 2s;
+        }
+
+        .flower4 {
+            top: 60%;
+            right: 5%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes floatFlower {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+                opacity: 0.9;
+            }
+        }
+
+        .landing .container {
+            position: relative;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.2);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        .landing p {
+            font-size: 1.3em;
+            margin: 20px 0;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            background: white;
+            color: #764ba2;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Main Content */
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-card h2 {
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Reasons Section */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .reason-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInStaggered 0.6s ease forwards;
+        }
+
+        .reason-card:nth-child(1) { animation-delay: 0.1s; }
+        .reason-card:nth-child(2) { animation-delay: 0.2s; }
+        .reason-card:nth-child(3) { animation-delay: 0.3s; }
+        .reason-card:nth-child(4) { animation-delay: 0.4s; }
+        .reason-card:nth-child(5) { animation-delay: 0.5s; }
+        .reason-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInStaggered {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reason-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .reason-card p {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        /* Memory Gallery */
+        .memory-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .memory-placeholder {
+            background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+            aspect-ratio: 1;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px dashed #764ba2;
+        }
+
+        .memory-placeholder:hover {
+            transform: scale(1.05);
+            border-color: #667eea;
+        }
+
+        /* Love Letter */
+        .love-letter {
+            background: #fff9e6;
+            border-left: 4px solid #764ba2;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            font-style: italic;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .love-letter p {
+            margin-bottom: 15px;
+        }
+
+        /* Timer/Countdown */
+        .countdown {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .countdown h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+        }
+
+        .countdown-display {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        .countdown-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .countdown-label {
+            font-size: 0.7em;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        /* Games Section */
+        .game-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .game-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-card h4 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        /* Interactive Game Styles */
+        .game-active {
+            display: grid;
+            place-items: center;
+            gap: 20px;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .game-button {
+            padding: 15px;
+            font-size: 1.1em;
+            border: 2px solid #764ba2;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: white;
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        .game-button:hover {
+            background: #764ba2;
+            color: white;
+        }
+
+        .game-button.correct {
+            background: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .game-button.wrong {
+            background: #ff6b6b;
+            color: white;
+            border-color: #ff6b6b;
+        }
+
+        /* Navigation */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #764ba2;
+            background: white;
+            color: #764ba2;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: #764ba2;
+            color: white;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Closing Page */
+        .closing {
+            text-align: center;
+            color: white;
+        }
+
+        .closing h2 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .closing .hearts {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin: 30px 0;
+        }
+
+        .animated-hearts .heart-icon {
+            font-size: 4.5rem;
+            display: inline-block;
+            transform-origin: center;
+            animation: floatHearts 2s ease-in-out infinite;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15));
+        }
+
+        .animated-hearts .heart-icon:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .animated-hearts .heart-icon:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes floatHearts {
+            0% { transform: translateY(0) scale(1) rotate(0deg); }
+            25% { transform: translateY(-10px) scale(1.08) rotate(-8deg); }
+            50% { transform: translateY(-18px) scale(1.14) rotate(6deg); }
+            75% { transform: translateY(-10px) scale(1.06) rotate(-4deg); }
+            100% { transform: translateY(0) scale(1) rotate(0deg); }
+        }
+
+        .animated-hearts .heart-icon:hover {
+            transform: translateY(-6px) scale(1.2);
+            transition: transform 0.2s ease;
+        }
+
+        /* GIF styling for closing page */
+        .closing .hearts img.closing-gif {
+            width: 420px;
+            max-width: 80%;
+            border-radius: 18px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            animation: floatHearts 2.2s ease-in-out infinite;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .closing .hearts img.closing-gif { width: 320px; max-width: 70%; }
+        }
+
+        @media (max-width: 480px) {
+            .closing .hearts img.closing-gif { width: 240px; max-width: 85%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .closing p {
+            font-size: 1.2em;
+            margin: 15px 0;
+            opacity: 0.95;
+        }
+
+        /* Memory Modal */
+        .memory-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .memory-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .memory-modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 80%;
+            max-height: 90%;
+            text-align: center;
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+
+        .memory-modal-image {
+            max-width: 100%;
+            max-height: 500px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        .memory-modal-message {
+            font-size: 1.3em;
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .memory-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #764ba2;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .memory-modal-close:hover {
+            background: #667eea;
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .reasons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .memory-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .countdown-display {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .game-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .landing h1 {
+                font-size: 2.5em;
+            }
+            .landing .heart img.landing-gif {
+                width: 5rem;
+            }
+
+            .content-card {
+                padding: 30px;
+            }
+
+            .reason-card p {
+                font-size: 0.9em;
+            }
+
+            .countdown-box {
+                font-size: 1.5em;
+                padding: 15px;
+            }
+
+            .countdown-label {
+                font-size: 0.65em;
+            }
+
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+
+            .memory-modal-content {
+                max-width: 95%;
+                padding: 20px;
+            }
+
+            .memory-modal-image {
+                max-height: 300px;
+            }
+
+            .memory-modal-message {
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                max-width: 100%;
+                width: 95%;
+            }
+
+            .landing h1 {
+                font-size: 1.8em;
+                margin-bottom: 10px;
+            }
+
+            .landing .heart {
+                font-size: 3em;
+                margin: 0 5px;
+            }
+
+            .landing p {
+                font-size: 1em;
+            }
+
+            .content-card {
+                padding: 20px;
+                border-radius: 15px;
+            }
+
+            .content-card h2 {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+            }
+
+            .reasons-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .reason-card {
+                min-height: 100px;
+                padding: 15px;
+                border-radius: 10px;
+            }
+
+            .reason-card p {
+                font-size: 0.85em;
+                font-weight: 500;
+            }
+
+            .memory-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .memory-placeholder {
+                border-radius: 10px;
+            }
+
+            .countdown-display {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .countdown-box {
+                font-size: 1.2em;
+                padding: 12px;
+                border-radius: 8px;
+            }
+
+            .countdown-label {
+                font-size: 0.6em;
+                margin-top: 5px;
+            }
+
+            .game-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .game-card {
+                padding: 20px;
+                border-radius: 12px;
+            }
+
+            .game-card h4 {
+                font-size: 1.1em;
+                margin-bottom: 8px;
+            }
+
+            .game-card p {
+                font-size: 0.9em;
+            }
+
+            .nav-buttons {
+                gap: 10px;
+                margin-top: 20px;
+            }
+
+            .nav-btn {
+                padding: 10px 12px;
+                font-size: 0.85em;
+                border-radius: 25px;
+            }
+
+            .cta-button {
+                padding: 10px 25px;
+                font-size: 0.95em;
+                margin-top: 20px;
+            }
+
+            .closing h2 {
+                font-size: 2em;
+            }
+
+            .closing .hearts {
+                font-size: 3.5em;
+                margin: 20px 0;
+            }
+
+            .closing p {
+                font-size: 1em;
+            }
+
+            .memory-modal-content {
+                max-width: 98%;
+                padding: 15px;
+                border-radius: 15px;
+            }
+
+            .memory-modal-image {
+                max-height: 250px;
+                border-radius: 10px;
+                margin-bottom: 15px;
+            }
+
+            .memory-modal-message {
+                font-size: 1em;
+                margin-bottom: 15px;
+            }
+
+            .memory-modal-close {
+                width: 35px;
+                height: 35px;
+                font-size: 1.2em;
+                top: 10px;
+                right: 10px;
+            }
+
+            .button-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .game-button {
+                padding: 12px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Memory Modal -->
+    <div id="memoryModal" class="memory-modal" onclick="closeMemory(event)">
+        <div class="memory-modal-content" onclick="event.stopPropagation()">
+            <button class="memory-modal-close" onclick="closeMemory()">✕</button>
+            <img id="modalImage" class="memory-modal-image" src="" alt="Memory">
+            <div id="modalMessage" class="memory-modal-message"></div>
+            <button class="cta-button" onclick="closeMemory()" style="width: 100%; margin-top: 20px;">Close ✨</button>
+        </div>
+    </div>
+
+
+    <!-- Landing Page -->
+    <div class="page active landing">
+        <div class="floating-flower flower1">🌸</div>
+        <div class="floating-flower flower2">🌺</div>
+        <div class="floating-flower flower3">🌹</div>
+        <div class="floating-flower flower4">🌷</div>
+        <div class="container">
+            <div style="margin-bottom: 20px; font-size: 1.5em; opacity: 0.8; letter-spacing: 3px;">✨ 💕 ✨ 💕 ✨</div>
+            <h1>Happy Valentine's Day Love!</h1>
+            <div class="heart"><img src="https://media.tenor.com/cofRHcGGOfoAAAAi/shy-cute.gif" alt="cute" class="landing-gif"></div>
+            <p style="font-size: 1.2em; margin: 25px 0; font-weight: 300; letter-spacing: 1px;">I have something special for you...</p>
+            <div style="height: 2px; width: 60px; background: rgba(255,255,255,0.3); margin: 30px auto;"></div>
+            <p style="font-size: 0.95em; margin: 30px 0; opacity: 0.85; line-height: 1.6;">Made with love, just for you 💌</p>
+            <button class="cta-button" onclick="nextPage()">Open This 💝</button>
+            <div style="margin-top: 30px; font-size: 1.5em; opacity: 0.8; letter-spacing: 3px;">✨ 💕 ✨ 💕 ✨</div>
+        </div>
+    </div>
+
+    <!-- Reasons Page -->
+    <div class="page">
+        <div class="container">
+            <div class="content-card">
+                <h2>✨ Reasons Why I Love You ✨</h2>
+                <div class="reasons-grid">
+                    <div class="reason-card">
+                        <p>🧠 Your GENIUS-LEVEL intelligence (basically a walking supercomputer!)</p>
+                    </div>
+                    <div class="reason-card">
+                        <p>🎯 You have PSYCHIC powers to know when I'm sad (mood detector unlocked!)</p>
+                    </div>
+                    <div class="reason-card">
+                        <p>💊 Being my Happy Pill AND Sad Pill (my entire emotional life support!)</p>
+                    </div>
+                    <div class="reason-card">
+                        <p>✨ Your UNFAIRLY beautiful face (it should be illegal to be this gorgeous!)</p>
+                    </div>
+                    <div class="reason-card">
+                        <p>👼 That PERFECT smol height (literally made for forehead kisses!)</p>
+                    </div>
+                    <div class="reason-card">
+                        <p>😔 Your IMPOSSIBLE-TO-RESIST sorry face (those puppy dog eyes WIN every time!)</p>
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="nav-btn" onclick="prevPage()">← Back</button>
+                    <button class="nav-btn" onclick="nextPage()">Next →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Memories Page -->
+    <div class="page">
+        <div class="container">
+            <div class="content-card">
+                <h2>🌹 Our Memories 🌹</h2>
+                <p style="text-align: center; color: #764ba2; font-size: 1.1em; margin-bottom: 20px;">
+                    Click on any spot to add your favorite photos of us!
+                </p>
+                <div class="memory-grid">
+                    <div class="memory-placeholder" style="background-image: url('images/IMG_20240526_171230_215.jpg'); background-size: cover; background-position: center;" onclick="showMemory('images/IMG_20240526_171230_215.jpg', '😍 Look at that GORGEOUS face! (mine is clearly not in this photo lol)')"></div>
+                    <div class="memory-placeholder" style="background-image: url('images/IMG_20240812_122813_164.jpg'); background-size: cover; background-position: center;" onclick="showMemory('images/IMG_20240812_122813_164.jpg', '🥺 You are literally TOO CUTE and it is ILLEGAL!')"></div>
+                    <div class="memory-placeholder" style="background-image: url('images/IMG_20240920_202306_860.jpg'); background-size: cover; background-position: center;" onclick="showMemory('images/IMG_20240920_202306_860.jpg', '🤪 This is us having fun together!')"></div>
+                    <div class="memory-placeholder" style="background-image: url('images/received_10046844902068244.jpeg'); background-size: cover; background-position: center;" onclick="showMemory('images/received_10046844902068244.jpeg', 'hahahahha pakyut ang mga kyut')"></div>
+                    <div class="memory-placeholder" style="background-image: url('images/received_1746164529416590.jpeg'); background-size: cover; background-position: center;" onclick="showMemory('images/received_1746164529416590.jpeg', '✨ Me pretending to be cool while you steal the show!')"></div>
+                    <div class="memory-placeholder" style="background-image: url('images/Screenshot_20250319-131122.jpg'); background-size: cover; background-position: center;" onclick="showMemory('images/Screenshot_20250319-131122.jpg', '💕 This is us being RIDICULOUSLY IN LOVE!')"></div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="nav-btn" onclick="prevPage()">← Back</button>
+                    <button class="nav-btn" onclick="nextPage()">Next →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Countdown Page -->
+    <div class="page">
+        <div class="container">
+            <div class="content-card">
+                <h2>💖 How Long We've Been Together 💖</h2>
+                <p style="text-align: center; color: #764ba2; font-size: 1.1em; margin-bottom: 20px;">
+                    Since October 28, 2022 at 10:00 PM
+                </p>
+                <div class="countdown">
+                    <div class="countdown-display">
+                        <div class="countdown-box">
+                            <span id="years">0</span>
+                            <div class="countdown-label">Years</div>
+                        </div>
+                        <div class="countdown-box">
+                            <span id="days">0</span>
+                            <div class="countdown-label">Days</div>
+                        </div>
+                        <div class="countdown-box">
+                            <span id="hours">0</span>
+                            <div class="countdown-label">Hours</div>
+                        </div>
+                        <div class="countdown-box">
+                            <span id="minutes">0</span>
+                            <div class="countdown-label">Minutes</div>
+                        </div>
+                        <div class="countdown-box">
+                            <span id="seconds">0</span>
+                            <div class="countdown-label">Seconds</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="nav-btn" onclick="prevPage()">← Back</button>
+                    <button class="nav-btn" onclick="nextPage()">Next →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Games Page -->
+    <div class="page">
+        <div class="container">
+            <div class="content-card">
+                <h2>🎮 Let's Play! 🎮</h2>
+                <div class="game-grid">
+                    <div class="game-card" onclick="startGuessTheNumber()">
+                        <h4>🎲 Guess the Number</h4>
+                        <p>If you guess right, I'll love you even more! (if possible)</p>
+                    </div>
+                    <div class="game-card" onclick="startTrivia()">
+                        <h4>❓ Love Trivia</h4>
+                        <p>How well do you know me? Let's find out!</p>
+                    </div>
+                </div>
+                <div id="game-container" style="margin-top: 30px;"></div>
+                <div class="nav-buttons">
+                    <button class="nav-btn" onclick="prevPage()">← Back</button>
+                    <button class="nav-btn" onclick="nextPage()">Next →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Closing Page -->
+    <div class="page closing">
+        <div class="container">
+            <h2>I Love You</h2>
+            <div class="hearts">
+                <img src="https://media1.tenor.com/m/LRDMe1QpqFYAAAAd/cat-cute.gif" alt="Muah!" class="closing-gif">
+            </div>
+            <p>Happy Valentine's Day to the love of my life!</p>
+            <p style="font-size: 1.5em; margin-top: 30px;">
+                
+                Now go give me a hug! 🤗
+            </p>
+            <button class="cta-button" style="margin-top: 30px;" onclick="restart()">Start Again ❤️</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        const pages = document.querySelectorAll('.page');
+        // The special number she chose for us (the day she chose me): 28
+        let randomNumber = 28;
+        let countdownInterval = null;
+        
+        function showPage(n) {
+            pages.forEach(page => page.classList.remove('active'));
+            pages[n].classList.add('active');
+            currentPage = n;
+            
+            // Clear previous intervals
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+            }
+            
+            // Trigger confetti on special pages
+            if (n === 0 || n === pages.length - 1) {
+                createConfetti();
+            }
+
+            // Start countdown on countdown page (page 3)
+            if (n === 3) {
+                updateCountdown();
+                countdownInterval = setInterval(function() {
+                    updateCountdown();
+                }, 1000);
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < pages.length - 1) {
+                showPage(currentPage + 1);
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 0) {
+                showPage(currentPage - 1);
+            }
+        }
+
+        function restart() {
+            showPage(0);
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                const colors = ['#667eea', '#764ba2', '#ff1493', '#ff69b4', '#ffd700'];
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-10px';
+                confetti.style.animation = `confettiFall ${2 + Math.random() * 1}s linear forwards`;
+                document.body.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes confettiFall {
+                to {
+                    transform: translateY(100vh) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        function showMemory(imageSrc, message) {
+            const modal = document.getElementById('memoryModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalMessage = document.getElementById('modalMessage');
+            
+            modalImage.src = imageSrc;
+            modalMessage.textContent = message;
+            modal.classList.add('active');
+            createConfetti();
+        }
+
+        function closeMemory(event) {
+            const modal = document.getElementById('memoryModal');
+            modal.classList.remove('active');
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const startDate = new Date(2022, 9, 28, 22, 0, 0); // October 28, 2022 at 10:00 PM
+            
+            const totalSeconds = Math.floor((now - startDate) / 1000);
+            
+            const years = Math.floor(totalSeconds / (365.25 * 24 * 60 * 60));
+            const remainingAfterYears = totalSeconds % (Math.floor(365.25 * 24 * 60 * 60));
+            
+            const days = Math.floor(remainingAfterYears / (24 * 60 * 60));
+            const remainingAfterDays = remainingAfterYears % (24 * 60 * 60);
+            
+            const hours = Math.floor(remainingAfterDays / (60 * 60));
+            const remainingAfterHours = remainingAfterDays % (60 * 60);
+            
+            const minutes = Math.floor(remainingAfterHours / 60);
+            const seconds = remainingAfterHours % 60;
+
+            document.getElementById('years').textContent = Math.floor(years);
+            document.getElementById('days').textContent = Math.floor(days);
+            document.getElementById('hours').textContent = Math.floor(hours);
+            document.getElementById('minutes').textContent = Math.floor(minutes);
+            document.getElementById('seconds').textContent = Math.floor(seconds);
+        }
+
+        function startGuessTheNumber() {
+            const container = document.getElementById('game-container');
+            container.innerHTML = `
+                <div class="game-active">
+                    <p>I'm thinking of a number between 1 and 100...</p>
+                    <input type="number" id="guessInput" min="1" max="100" style="padding: 10px; font-size: 1em; border-radius: 5px; border: 2px solid #764ba2;">
+                    <button class="game-button" onclick="checkGuess()" style="width: 100%; background: #764ba2; color: white;">Check Guess</button>
+                    <p id="result"></p>
+                </div>
+            `;
+        }
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('guessInput').value);
+            const result = document.getElementById('result');
+            
+            if (!guess) {
+                result.textContent = 'Please enter a number!';
+                return;
+            }
+
+            if (guess === 28) {
+                result.textContent = "🎉 You're right — it's the number that's very special to us! Iloveyou!";
+                result.style.color = '#4CAF50';
+                createConfetti();
+            } else if (guess < 28) {
+                result.textContent = '📈 Too low! Try again!';
+                result.style.color = '#ff9800';
+            } else {
+                result.textContent = '📉 Too high! Try again!';
+                result.style.color = '#ff9800';
+            }
+        }
+
+        function startTrivia() {
+            const questions = [
+                { q: 'What is my favorite color?', a: ['Blue', 'purple', 'Pink'], correct: 0 },
+                { q: 'When is my birthday?', a: ['January', 'March', 'September'], correct: 2 },
+                { q: 'What makes me happiest?', a: ['Money', 'You', 'Sleep'], correct: 1 },
+            ];
+            
+            const q = questions[Math.floor(Math.random() * questions.length)];
+            const container = document.getElementById('game-container');
+            
+            container.innerHTML = `
+                <div class="game-active">
+                    <p style="font-size: 1.2em; color: #764ba2; font-weight: bold;">${q.q}</p>
+                    <div class="button-grid">
+                        ${q.a.map((ans, idx) => `
+                            <button class="game-button" onclick="checkAnswer(${idx}, ${q.correct})">
+                                ${ans}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <p id="trivia-result"></p>
+                </div>
+            `;
+        }
+
+        function checkAnswer(selected, correct) {
+            const result = document.getElementById('trivia-result');
+            if (selected === correct) {
+                result.textContent = '🎉 You got it right! I knew you knew me well! 💕';
+                result.style.color = '#4CAF50';
+                createConfetti();
+            } else {
+                result.textContent = '❌ Not quite, but I love your effort! Try another one? 😊';
+                result.style.color = '#ff6b6b';
+            }
+        }
+
+        // Initialize
+        showPage(0);
+    </script>
+</body>
+</html>
